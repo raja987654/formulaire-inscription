@@ -1,0 +1,69 @@
+<div class="registration-container">
+    <button class="btn-register" (click)="openModal()">S'inscrire</button>
+  
+    <div class="modal" [ngClass]="{'show': showModal}">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Inscription</h2>
+          <span class="close" (click)="closeModal()">&times;</span>
+        </div>
+  
+        <form (ngSubmit)="onSubmit()" #inscriptionForm="ngForm">
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input 
+              type="text" 
+              id="nom" 
+              name="nom" 
+              [(ngModel)]="formData.nom" 
+              required 
+              #nom="ngModel"
+            >
+            <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="error-message">
+              Le nom est requis
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              [(ngModel)]="formData.email" 
+              required 
+              email 
+              #email="ngModel"
+            >
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+              Veuillez entrer un email valide
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="motdepasse">Mot de passe</label>
+            <input 
+              type="password" 
+              id="motdepasse" 
+              name="motdepasse" 
+              [(ngModel)]="formData.motdepasse" 
+              required 
+              minlength="6" 
+              #motdepasse="ngModel"
+            >
+            <div *ngIf="motdepasse.invalid && (motdepasse.dirty || motdepasse.touched)" class="error-message">
+              Le mot de passe doit avoir au moins 6 caractères
+            </div>
+          </div>
+  
+          <button 
+            type="submit" 
+            class="btn-submit" 
+            [disabled]="!inscriptionForm.valid"
+          >
+            S'inscrire
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
